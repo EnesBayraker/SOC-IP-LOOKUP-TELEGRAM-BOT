@@ -8,7 +8,7 @@ from intelligence import check_virustotal, check_abuseipdb, check_internetdb
 # KURUMSAL LOGLAMA SİSTEMİ 
 # ==========================================
 logging.basicConfig(
-    filename='soc_bot.log', # Tüm kayıtlar bu dosyada tutulacak
+    filename='soc_bot.log', 
     format='%(asctime)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
@@ -24,7 +24,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     welcome_message = (
         "🛡️ *Kurumsal SOC Asistanına Hoş Geldiniz*\n\n"
         "Bana şüpheli bir IP adresi gönderin, arka planda OSINT "
-        "(Açık Kaynak İstihbaratı) araçlarını çalıştırıp size detaylı "
+        "araçlarını çalıştırıp size detaylı "
         "bir tehdit profili çıkarayım.\n\n"
         "Bekliyorum..."
     )
