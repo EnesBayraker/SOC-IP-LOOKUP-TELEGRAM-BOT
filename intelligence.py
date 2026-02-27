@@ -27,7 +27,7 @@ def check_virustotal(ip):
             network = attr.get('network', 'Bilinmiyor')
             tags = ", ".join(attr.get('tags', [])) if attr.get('tags') else "Etiket Yok"
             
-            # Kimler zararlı buldu? (İlk 3 firmayı alalım)
+            # Kimler zararlı buldu? 
             analysis_results = attr.get('last_analysis_results', {})
             flagged_by = [vendor for vendor, result in analysis_results.items() if result['category'] == 'malicious']
             flagged_str = ", ".join(flagged_by[:3]) + ("..." if len(flagged_by) > 3 else "")
@@ -95,7 +95,7 @@ def check_internetdb(ip):
             vulns = data.get('vulns', [])
             
             port_str = ", ".join(map(str, ports)) if ports else "Yok"
-            # Sadece ilk 5 zafiyeti alalım ki rapor çok uzamasın
+           
             vuln_str = ", ".join(vulns[:5]) if vulns else "Yok"
             
             report = (
@@ -109,7 +109,7 @@ def check_internetdb(ip):
     except Exception as e:
         return f"InternetDB Bağlantı Hatası: {e}"
 
-# Test Bloğu
+
 if __name__ == "__main__":
     test_ip = "185.220.101.46"
     print("--- DETAYLI İSTİHBARAT RAPORU ---")
