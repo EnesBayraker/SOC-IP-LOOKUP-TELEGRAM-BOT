@@ -1,60 +1,40 @@
-# SOC-IP-LOOKUP-TELEGRAM-BOT
-# 🛡️ Kurumsal SOC Asistanı (Threat Intelligence Bot)
+# SOC IP Lookup Telegram Bot
 
-Bu proje, Güvenlik Operasyon Merkezi (SOC) analistlerinin günlük "Tehdit Avcılığı" (Threat Hunting) ve OSINT (Açık Kaynak İstihbaratı) süreçlerini otomatize etmek için geliştirilmiş bir Telegram botudur. 
+A Telegram bot that automates daily threat-hunting and OSINT workflows for Security Operations Center (SOC) analysts. Instead of clicking through multiple tabs when a suspicious IP appears, analysts send a single message and get a rich intelligence report in seconds.
 
-Şüpheli bir IP adresi tespit edildiğinde manuel olarak sekme sekme gezmek yerine, bota tek bir mesaj atılarak saniyeler içinde zenginleştirilmiş bir istihbarat raporu elde edilir.
+## Features
 
-## 🚀 Özellikler (Features)
-* **Çoklu İstihbarat Kaynağı:** VirusTotal (Zararlı skoru ve Ağ Sahibi) ve AbuseIPDB (Topluluk raporları ve Güvenilirlik Skoru) API'lerini tek potada eritir.
-* **Saldırı Yüzeyi Analizi:** Shodan'ın InternetDB servisini kullanarak hedefin açık portlarını ve bilinen zafiyetlerini (CVE) API anahtarı gerektirmeden tespit eder.
-* **Güvenlik Standartları (Defanging):** Analistlerin yanlışlıkla zararlı bağlantılara tıklamasını önlemek için IP adreslerini otomatik olarak silahsızlandırır (Örn: `185[.]220[.]101[.]46`).
-* **Girdi Doğrulama (Input Validation):** Hatalı veya manipüle edilmiş girdileri Regex ile engeller.
-* **Kurumsal Loglama (Audit Trail):** Sistem üzerinden yapılan her sorguyu, saati ve sorgulayan kullanıcısıyla birlikte `.log` dosyasına kaydeder.
+- **Multiple intelligence sources** — combines VirusTotal (malicious score, network owner) and AbuseIPDB (community reports, confidence score) in one query.
+- **Attack surface analysis** — uses Shodan's InternetDB service to detect open ports and known vulnerabilities (CVE) without requiring an API key.
+- **Defanging** — automatically defangs IP addresses (e.g. `185[.]220[.]101[.]46`) to prevent accidental clicks on malicious links.
+- **Input validation** — blocks malformed or manipulated input with regex.
+- **Audit trail** — logs every query with its timestamp and requesting user to a `.log` file.
 
-## 📸 Ekran Görüntüsü
-<img width="824" height="576" alt="telegramss" src="https://github.com/user-attachments/assets/1dd7c54a-07e7-4dfa-bbd5-a0c77645df6b" />
+## Installation
 
-
-
-## 🛠️ Kurulum (Installation)
-
-Sistemi kendi ortamınızda çalıştırmak için aşağıdaki adımları izleyin:
-
-**1. Depoyu Klonlayın:**
 ```bash
 git clone https://github.com/EnesBayraker/SOC-IP-LOOKUP-TELEGRAM-BOT.git
 cd SOC-IP-LOOKUP-TELEGRAM-BOT
 
-```
-
-**2. Sanal Ortam (Virtual Environment) Oluşturun:**
-
-```bash
 python3 -m venv venv
 source venv/bin/activate
 
-```
-
-**3. Gereksinimleri Yükleyin:**
-
-```bash
 pip install requests python-telegram-bot
-
 ```
 
-**4. API Anahtarlarını Ekleyin:**
-`intelligence.py` ve `bot.py` dosyalarını açarak kendi VirusTotal, AbuseIPDB API anahtarlarınızı ve Telegram Bot Token'ınızı ilgili değişkenlere tanımlayın.
+Open `intelligence.py` and `bot.py` and set your VirusTotal and AbuseIPDB API keys and your Telegram bot token in the relevant variables.
 
-**5. Botu Başlatın:**
+Run the bot:
 
 ```bash
 python bot.py
-
 ```
 
-## 🏗️ Mimari (Architecture)
+## Architecture
 
-* `bot.py`: Kullanıcı arayüzü, girdi doğrulama ve Telegram entegrasyonundan sorumludur.
-* `intelligence.py`: İstihbarat kaynaklarıyla (API) haberleşen, JSON verilerini ayıklayan (parsing) ve anlamlandıran ana omurgadır.
+- `bot.py` — user interface, input validation and Telegram integration.
+- `intelligence.py` — talks to the intelligence APIs and parses the returned JSON into a readable report.
 
+## License
+
+MIT
